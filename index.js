@@ -20,26 +20,15 @@ optiflowzChat.innerHTML = `
             <h1>AI AGENT</h1>
         </div>
         <div>
-            <button id="optiflowz-chat-more">
+            <button id="optiflowz-chat-new-chat">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 13C6.55 13 7 12.55 7 12C7 11.45 6.55 11 6 11C5.45 11 5 11.45 5 12C5 12.55 5.45 13 6 13Z" stroke="black" stroke-width="2"/>
-                    <path d="M12 13C12.55 13 13 12.55 13 12C13 11.45 12.55 11 12 11C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13Z" stroke="black" stroke-width="2"/>
-                    <path d="M18 13C18.55 13 19 12.55 19 12C19 11.45 18.55 11 18 11C17.45 11 17 11.45 17 12C17 12.55 17.45 13 18 13Z" stroke="black" stroke-width="2"/>
+                    <path d="M12 4V20M20 12H4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <div>
-                    <p id="optiflowz-chat-new-chat">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 4V20M20 12H4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Nova konverzacija
-                    </p>
-                    <p id="optiflowz-chat-rating">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.0767 4.21969C11.4183 3.39839 12.5817 3.39839 12.9233 4.21968L14.7811 8.68645L19.6034 9.07305C20.49 9.14413 20.8496 10.2506 20.174 10.8293L16.5 13.9765L17.6225 18.6822C17.8288 19.5474 16.8876 20.2313 16.1285 19.7676L12 17.246L7.87146 19.7676C7.11236 20.2313 6.17111 19.5474 6.3775 18.6822L7.49998 13.9765L3.82593 10.8293C3.1504 10.2506 3.50992 9.14413 4.39658 9.07305L9.21882 8.68645L11.0767 4.21969Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Oceni konverzaciju
-                    </p>
-                </div>
+            </button>
+            <button id="optiflowz-chat-rating">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.0767 4.21969C11.4183 3.39839 12.5817 3.39839 12.9233 4.21968L14.7811 8.68645L19.6034 9.07305C20.49 9.14413 20.8496 10.2506 20.174 10.8293L16.5 13.9765L17.6225 18.6822C17.8288 19.5474 16.8876 20.2313 16.1285 19.7676L12 17.246L7.87146 19.7676C7.11236 20.2313 6.17111 19.5474 6.3775 18.6822L7.49998 13.9765L3.82593 10.8293C3.1504 10.2506 3.50992 9.14413 4.39658 9.07305L9.21882 8.68645L11.0767 4.21969Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
         </div>
     </section>
@@ -90,7 +79,7 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.1/style.css">`;
+document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.2/style.css">`;
 
 // Uspostavljanje konekcije sa soket serverom
 socket.once("connect", async () => {
