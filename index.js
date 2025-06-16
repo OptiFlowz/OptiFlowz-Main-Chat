@@ -1,6 +1,6 @@
 import "https://cdn.socket.io/4.7.2/socket.io.min.js";
 
-const socketString = 'https://dfbb-2a06-63c0-a01-6800-55df-2117-785e-81b6.ngrok-free.app/';
+const socketString = 'https://optiflowz-chat-server.fly.dev/';
 var socket;
 socket = io(socketString, {
     transports: ['websocket'],
@@ -16,7 +16,7 @@ optiflowzChat.innerHTML = `
 <div class="optiflowz-chat-wrapper" style="display: none;">
     <section class="optiflowz-chat-header">
         <div>
-            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png" alt="Default Agent Avatar">
+            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png" alt="Default Agent Avatar">
             <h1>AI AGENT</h1>
         </div>
         <div>
@@ -32,12 +32,6 @@ optiflowzChat.innerHTML = `
                             <path d="M12 4V20M20 12H4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         Nova konverzacija
-                    </p>
-                    <p id="optiflowz-chat-rejoin">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 13C19 16.866 15.866 20 12 20C8.13401 20 5 16.866 5 13C5 9.13401 8.13401 6 12 6H17M17 6L14 3M17 6L14 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Ponovo se pridruži
                     </p>
                     <p id="optiflowz-chat-rating">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,19 +71,6 @@ optiflowzChat.innerHTML = `
             </div>
         </div>
     </div>
-    <div class="optiflowz-chat-form-rejoin">
-        <div class="closeRatingWrapper" onclick="closeOptiFlowzRejoinForm()"></div>
-        <div class="optiflowz-rating-content">
-            <div>
-                <p>Unesite kod kako biste se vratili na staru konverzaciju</p>
-                <input type="text" placeholder="Kod" class="optiflowz-chat-rejoin-code" required>
-                <section>
-                    <button onclick="closeOptiFlowzRejoinForm()">Otkaži</button>
-                    <button id="optiflowz-chat-rejoin-button">Potrvdi</button>
-                </section>
-            </div>
-        </div>
-    </div>
     <div class="optiflowz-chat-error">
         <div class="closeRatingWrapper" onclick="closeOptiFlowzErrorPopup()"></div>
         <div class="optiflowz-rating-content">
@@ -109,7 +90,7 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat@0.1.6/style.css">`;
+document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.1/style.css">`;
 
 // Uspostavljanje konekcije sa soket serverom
 socket.once("connect", async () => {
@@ -123,7 +104,7 @@ socket.once("connect", async () => {
         var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         chatMessages.innerHTML = `
         <div class="optiflowz-chat-message-agent">
-            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png" alt="Agent Avatar">
+            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png" alt="Agent Avatar">
             <div>
                     <p>Zdravo! Kako mogu da Vam pomognem danas?</p>
                     <span>${time}</span>
@@ -139,7 +120,7 @@ socket.once("connect", async () => {
         var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         chatMessages.innerHTML = `
         <div class="optiflowz-chat-message-agent">
-            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png" alt="Agent Avatar">
+            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png" alt="Agent Avatar">
             <div>
                     <p>Zdravo! Kako mogu da Vam pomognem danas?</p>
                     <span>${time}</span>
@@ -198,8 +179,7 @@ var sendBtn = document.getElementById('optiflowz-chat-send');
 var textarea = document.getElementById('optiflowz-chat-textarea');
 var chatMessages = document.querySelector('.optiflowz-chat-messages');
 var newChatBtn = document.getElementById('optiflowz-chat-new-chat');
-var rejoinBtn = document.getElementById('optiflowz-chat-rejoin-button');
-var currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
+var currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
 
 sendBtn.addEventListener("click",()=>{
     sendMessage();
@@ -248,39 +228,7 @@ function sendMessage(){
     }
 }
 
-let waitingForAgent = false;
-function opAgentConnectingText(i){
-    if(!waitingForAgent)
-        return;
-
-    document.querySelector('.optiflowz-chat-header h1').innerHTML = "Čeka se agent";
-    for (let j = 0; j < i; j++) {
-        document.querySelector('.optiflowz-chat-header h1').innerHTML += ".";
-    }
-    setTimeout(() => {
-        if(i > 2)
-            i = 0;
-        opAgentConnectingText(i+1);
-    }, 333.33);
-}
-
-function finishConversationOptiFlowz(params) {
-    return new Promise((resolve, reject) => {
-      socket.emit('finish',{ sessionID: localStorage.sessionID },(res, err) => {
-          if (err){
-            callErrorPopup(err.error);
-            return reject(err.success);
-          }
-          resolve(res);
-        }
-      );
-    });
-}
-
 newChatBtn.addEventListener("click", async () => {
-
-    let da = await finishConversationOptiFlowz();
-
     socket.disconnect();
     socket = io(socketString, {
         transports: ['websocket'],
@@ -298,7 +246,7 @@ newChatBtn.addEventListener("click", async () => {
         var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
         chatMessages.innerHTML = `
         <div class="optiflowz-chat-message-agent">
-            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png" alt="Agent Avatar">
+            <img src="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png" alt="Agent Avatar">
             <div>
                     <p>Zdravo! Kako mogu da Vam pomognem danas?</p>
                     <span>${time}</span>
@@ -307,12 +255,11 @@ newChatBtn.addEventListener("click", async () => {
         addQuestionsToChat();
     });
 
-    waitingForAgent = false;
     isBotChat = true;
     isWaitingForBot = false;
 
-    document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
-    currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
+    document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
+    currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
     document.querySelector('.optiflowz-chat-header h1').innerHTML = "AI AGENT";
 
     socket.on('receive_message', (data) => {
@@ -396,29 +343,6 @@ function removeQuestionsFromChat(){
         chatMessages.removeChild(questions);
     }
 }
-
-rejoinBtn.addEventListener("click", async () => {
-    let sessionID = document.querySelector('.optiflowz-chat-rejoin-code').value.trim();
-    if(sessionID == ""){
-        document.querySelector('.optiflowz-chat-rejoin-code').classList.add("error");
-        return;
-    }
-
-    try {
-        var chatHistoryPromise = await loadChatHistory(sessionID, true);
-        if(!chatHistoryPromise){
-            return;
-        }
-
-        localStorage.removeItem("sessionID");
-        socket.emit('join_room', {
-            sessionID: sessionID
-        })
-        localStorage.setItem("sessionID", sessionID);
-
-        closeOptiFlowzRejoinForm();
-    } catch {}
-})
 
 socket.on('receive_message', (data) => {
     receiveMessage(data)
@@ -512,7 +436,7 @@ function receiveMessage(data){
             lastStep = null;
         }
 
-        let mTime = data.timeStamp, image = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
+        let mTime = data.timeStamp, image = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
         if(data.author == "agent"){
             isWaitingForBot = false;
             mTime = new Date(Number(data.timeStamp)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -546,23 +470,16 @@ async function loadChatHistory(ssID, rejoin) {
         let chatHistory = await load_convo(ssID);
         if(!chatHistory)
         {
-            if(rejoin){
-                document.querySelector('.optiflowz-chat-rejoin-code').classList.add("error");
-            }
             return reject(false);
         }
 
         if(chatHistory?.error == "Can't load finished session" && !rejoin){
             newChatBtn.click();
-            document.querySelector("#optiflowz-chat-more div").classList.remove("open");
             return reject(false);
         }
 
         if(chatHistory.convo){
             if (!chatHistory.convo[0].conversation[0].Content){
-                if(rejoin){
-                    document.querySelector('.optiflowz-chat-rejoin-code').classList.add("error");
-                }
                 return reject(false);
             }
         }else{ return reject(false); }
@@ -574,11 +491,11 @@ async function loadChatHistory(ssID, rejoin) {
                 messageElement.classList.add("optiflowz-chat-message-user");
             } else if( message.Sender === 'a') {
                 messageElement.classList.add("optiflowz-chat-message-agent");
-                messageElement.innerHTML = `<img src="${chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/DefaultIcon.png`}" alt="Agent Avatar">`;
+                messageElement.innerHTML = `<img src="${chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/DefaultIcon.png`}" alt="Agent Avatar">`;
             }
             else {
                 messageElement.classList.add("optiflowz-chat-message-agent");
-                messageElement.innerHTML = `<img src="https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png" alt="Agent Avatar">`;
+                messageElement.innerHTML = `<img src="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png" alt="Agent Avatar">`;
             }
 
             let messageTime = new Date(Number(message.Time)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -592,12 +509,12 @@ async function loadChatHistory(ssID, rejoin) {
         })
 
         if(chatHistory.convo[0].Agent) {
-            currentAgentIcon = chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/DefaultIcon.png`;
-            document.querySelector('.optiflowz-chat-header img').src = chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/DefaultIcon.png`;
+            currentAgentIcon = chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/DefaultIcon.png`;
+            document.querySelector('.optiflowz-chat-header img').src = chatHistory.convo[0].Agent.Image || `https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/DefaultIcon.png`;
             document.querySelector('.optiflowz-chat-header h1').innerHTML = chatHistory.convo[0].Agent.Name;
         }else{
-            currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
-            document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/Laptop-Centar-Chat/aiAgentImg.png";
+            currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
+            document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
             document.querySelector('.optiflowz-chat-header h1').innerHTML = "AI AGENT";
         }
 
@@ -717,34 +634,6 @@ document.getElementById("optiflowz-chat-rating").addEventListener("click", () =>
 
 window.closeOptiFlowzRatingScreen = function() {
     document.querySelector('.optiflowz-rating-wrapper').classList.remove('open');
-}
-
-// REJOIN
-
-document.getElementById("optiflowz-chat-rejoin").addEventListener("click", () => {
-    document.querySelector('.optiflowz-chat-form-rejoin').classList.add('open');
-});
-
-window.closeOptiFlowzRejoinForm = function() {
-    document.querySelector('.optiflowz-chat-form-rejoin').classList.remove('open');
-}
-
-var moreMenu =  document.querySelector("#optiflowz-chat-more div");
-document.getElementById("optiflowz-chat-more").addEventListener("click", () => {
-    moreMenu.classList.toggle("open");
-    if(moreMenu.classList.contains("open")){
-        setTimeout(() => {
-            chat.addEventListener("click", closeOptiflowzMoreMenu);
-        }, 50);
-    }else{
-        moreMenu.classList.remove("open");
-        chat.removeEventListener("click", closeOptiflowzMoreMenu);
-    }
-})
-
-function closeOptiflowzMoreMenu(){
-    moreMenu.classList.remove("open");
-    chat.removeEventListener("click", closeOptiflowzMoreMenu);
 }
 
 window.closeOptiFlowzErrorPopup = function() {
