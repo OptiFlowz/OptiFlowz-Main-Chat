@@ -30,6 +30,11 @@ optiflowzChat.innerHTML = `
                     <path d="M11.0767 4.21969C11.4183 3.39839 12.5817 3.39839 12.9233 4.21968L14.7811 8.68645L19.6034 9.07305C20.49 9.14413 20.8496 10.2506 20.174 10.8293L16.5 13.9765L17.6225 18.6822C17.8288 19.5474 16.8876 20.2313 16.1285 19.7676L12 17.246L7.87146 19.7676C7.11236 20.2313 6.17111 19.5474 6.3775 18.6822L7.49998 13.9765L3.82593 10.8293C3.1504 10.2506 3.50992 9.14413 4.39658 9.07305L9.21882 8.68645L11.0767 4.21969Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </button>
+            <a href="https://optiflowz.com/chat-privacy-policy">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 10L11 14L9 12M4 5V12.0557C4 15.0859 5.71202 17.856 8.42229 19.2111L12 21L15.5777 19.2111C18.288 17.856 20 15.0859 20 12.0557V5L19.303 5.07744C16.8542 5.34953 14.3912 4.70802 12.3863 3.27594L12 3L11.6137 3.27594C9.60878 4.70802 7.14576 5.34953 4.69699 5.07744L4 5Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
         </div>
     </section>
     <section class="optiflowz-chat-body">
@@ -60,6 +65,18 @@ optiflowzChat.innerHTML = `
             </div>
         </div>
     </div>
+    <div class="optiflowz-chat-consent">
+        <div class="closeRatingWrapper" onclick="closeOptiFlowzConsentScreen()"></div>
+        <div class="optiflowz-rating-content">
+            <div>
+                <p>Korišćenjem ovog četa pristajete na obradu vaših podataka u skladu sa našom <a href='https://optiflowz.com/chat-privacy-policy'>Politikom privatnosti</a>.</p>
+                <section>
+                    <button onclick="closeOptiFlowzConsentScreen()">Otkaži</button>
+                    <button id="optiflowz-chat-consent-button">Potrvdi</button>
+                </section>
+            </div>
+        </div>
+    </div>
     <div class="optiflowz-chat-error">
         <div class="closeRatingWrapper" onclick="closeOptiFlowzErrorPopup()"></div>
         <div class="optiflowz-rating-content">
@@ -79,7 +96,7 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.4/style.css">`;
+document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.5/style.css">`;
 
 // Uspostavljanje konekcije sa soket serverom
 socket.once("connect", async () => {
@@ -532,6 +549,7 @@ let isOptiFlowzChatOpen = false;
 let chatOpenTimeout = setTimeout(() => {}, 150);
 
 if(localStorage.leftChatOpen == 1){
+    showConsentScreen();
     isOptiFlowzChatOpen=true;
     chat.children[1].style.display = "flex";
         chatOpenTimeout = setTimeout(() => {
@@ -570,6 +588,7 @@ openChatButton.addEventListener("click", () => {
             chat.children[1].style.display = "none";
         }, 150);
     }else{
+        showConsentScreen();
         localStorage.leftChatOpen = 1;
         chat.children[1].style.display = "flex";
         chatOpenTimeout = setTimeout(() => {
@@ -657,3 +676,24 @@ function removeChatLoader(){
 function addChatLoader(){
     document.querySelector(".optiflowz-chat-loader").classList.remove("off");
 }
+
+function showConsentScreen(){
+    if(localStorage.optiflowzConsent == 1)
+        return;
+    document.querySelector('.optiflowz-chat-consent').classList.add('open');
+}
+
+window.closeOptiFlowzConsentScreen = function(){
+    localStorage.optiflowzConsent = 0;
+    chat.classList.remove("chat-open");
+    localStorage.leftChatOpen = 0;
+    chatOpenTimeout = setTimeout(() => {
+        chat.children[1].style.display = "none";
+    }, 150);
+    isOptiFlowzChatOpen = false;
+}
+
+document.getElementById("optiflowz-chat-consent-button").addEventListener("click", () => {
+    localStorage.optiflowzConsent = 1;
+    document.querySelector('.optiflowz-chat-consent').classList.remove('open');
+});
