@@ -4,8 +4,8 @@
     /* MAIN SETTINGS */
     --chat-desktop-width: 410px;
     --chat-desktop-height: 550px;
-    --chat-primary: #4680FD;
-    --chat-secondary: #0034A3;
+    --chat-primary: #338CFF;
+    --chat-secondary: #4C9AFF;
     --chat-borderRadius: 15px;
     --chat-border: 1px solid rgba(230, 230, 230, 0.5);
 
@@ -27,7 +27,7 @@
     --chat-messageLineHeight: 1.4rem;
     --chat-messageBoxShadow: 0px 0px 20px rgba(26, 27, 49, 0.1);
     --chat-messageBorder: 0px solid rgba(75, 70, 116, 0.3);
-    --chat-linkColor: #0034A3;
+    --chat-linkColor: #338CFF;
     --chat-messageBorderRadius: 15px;
     --chat-botMessageBackground: #ffffff;
     --chat-botMessageColor: #131417;
