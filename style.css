@@ -5,13 +5,18 @@
     --chat-desktop-width: 410px;
     --chat-desktop-height: 550px;
     --chat-primary: #338CFF;
-    --chat-secondary: #4C9AFF;
+    --chat-secondary: #185fbd;
     --chat-borderRadius: 15px;
     --chat-border: 1px solid rgba(230, 230, 230, 0.5);
 
+    --blueAccent1: #003e8e;
+    --blueAccent2: #338cff;
+    --blueAccent3: #4c9aff;
+    --blueButtonGradient: linear-gradient(-45deg,var(--blueAccent1),var(--blueAccent2),var(--blueAccent3));
+
     /* CHAT OPEN BUTTON SETTINGS */
     --chat-messageOpenBorderRadius: 50%;
-    --chatMainGradient: var(--chat-primary);
+    --chatMainGradient: var(--blueButtonGradient);
 
     /* CHAT HEADER SETTINGS */
     --chat-headerGradient: linear-gradient(-90deg, #3c3e4e, #131417);
@@ -21,14 +26,14 @@
     --chat-headerButtonSVGFill: #131417;
 
     /* CHAT BODY SETTINGS */
-    --chat-bodyBorderRadius: 20px 20px 0px 0px;
+    --chat-bodyBorderRadius: 24px 24px 0px 0px;
     --chat-chatBackground: rgb(241, 242, 245);
     --chat-messageFontSize: 1.1rem;
     --chat-messageLineHeight: 1.4rem;
     --chat-messageBoxShadow: 0px 0px 20px rgba(26, 27, 49, 0.1);
     --chat-messageBorder: 0px solid rgba(75, 70, 116, 0.3);
     --chat-linkColor: #338CFF;
-    --chat-messageBorderRadius: 15px;
+    --chat-messageBorderRadius: 18px;
     --chat-botMessageBackground: #ffffff;
     --chat-botMessageColor: #131417;
     --chat-userMessageTextColor: #ffffff;
@@ -211,7 +216,7 @@
 }
 
 .optiflowz-chat-header div button::after, .optiflowz-chat-header div a::after{
-    content: "Nova konverzacija";
+    content: "New conversation";
     opacity: 0;
     position: absolute;
     top: 34px;
@@ -234,10 +239,10 @@
 }
 
 .optiflowz-chat-header div button:nth-child(2)::after{
-    content: "Oceni konverzaciju";
+    content: "Rate conversation";
 }
 .optiflowz-chat-header div a::after{
-    content: "Politika privatnosti";
+    content: "Privacy Policy";
 }
 .optiflowz-chat-header div button:hover, .optiflowz-chat-header div a:hover{
     filter: brightness(0.8);
