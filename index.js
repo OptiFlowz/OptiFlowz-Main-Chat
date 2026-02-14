@@ -42,7 +42,7 @@ optiflowzChat.innerHTML = `
     </section>
     <section class="optiflowz-chat-input">
         <div>
-            <textarea name="chat-input" id="optiflowz-chat-textarea" placeholder="Unesite poruku..."></textarea>
+            <textarea name="chat-input" id="optiflowz-chat-textarea" placeholder="Enter your message..."></textarea>
             <button id="optiflowz-chat-send">
                 <svg data-v-2a7fb1c3="" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="m2 21l21-9L2 3v7l15 2l-15 2z"></path></svg>
             </button>
@@ -96,7 +96,7 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.8/style.css">`;
+document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.9/style.css">`;
 
 // Uspostavljanje konekcije sa soket serverom
 socket.once("connect", async () => {
