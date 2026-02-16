@@ -96,7 +96,7 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-const cssHref = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.95/style.css";
+const cssHref = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.96/style.css";
 if (!document.querySelector(`link[href="${cssHref}"]`)) {
   const link = document.createElement("link");
   link.rel = "stylesheet";
