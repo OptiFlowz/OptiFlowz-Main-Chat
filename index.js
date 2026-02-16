@@ -96,7 +96,13 @@ optiflowzChat.innerHTML = `
 </div>
 `;
 document.body.appendChild(optiflowzChat);
-document.body.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.9/style.css">`;
+const cssHref = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat@0.0.91/style.css";
+if (!document.querySelector(`link[href="${cssHref}"]`)) {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = cssHref;
+  document.head.appendChild(link);
+}
 
 // Uspostavljanje konekcije sa soket serverom
 socket.once("connect", async () => {
@@ -264,7 +270,8 @@ newChatBtn.addEventListener("click", async () => {
     isBotChat = true;
     isWaitingForBot = false;
 
-    document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
+    const headerImg = chat?.querySelector(".optiflowz-chat-header img");
+    if (headerImg) headerImg.src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
     currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
     document.querySelector('.optiflowz-chat-header h1').innerHTML = "AI AGENT";
 
@@ -520,7 +527,8 @@ async function loadChatHistory(ssID, rejoin) {
             document.querySelector('.optiflowz-chat-header h1').innerHTML = chatHistory.convo[0].Agent.Name;
         }else{
             currentAgentIcon = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
-            document.querySelector('.optiflowz-chat-header img').src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
+            const headerImg = chat?.querySelector(".optiflowz-chat-header img");
+            if (headerImg) headerImg.src = "https://cdn.jsdelivr.net/gh/OptiFlowz/OptiFlowz-Main-Chat/aiAgentImg.png";
             document.querySelector('.optiflowz-chat-header h1').innerHTML = "AI AGENT";
         }
 
