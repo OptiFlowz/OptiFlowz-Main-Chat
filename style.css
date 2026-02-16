@@ -19,30 +19,30 @@
     --chatMainGradient: var(--blueButtonGradient);
 
     /* CHAT HEADER SETTINGS */
-    --chat-headerGradient: #ffffff0d;
+    --chat-headerGradient: #090a0b;
     --chat-headerTextColor: #FFFFFF;
     --chat-headerBottomBorder: none;
     --chat-headerButtonBackground: #FFFFFF;
     --chat-headerButtonSVGFill: #131417;
 
     /* CHAT BODY SETTINGS */
-    --chat-bodyBorderRadius: 24px 24px 0px 0px;
-    --chat-chatBackground: #090a0b;
+    --chat-bodyBorderRadius: 0px;
+    --chat-chatBackground: #ffffff0d;
     --chat-messageFontSize: 1.1rem;
     --chat-messageLineHeight: 1.32;
     --chat-messageBoxShadow: 0px 0px 20px rgba(26, 27, 49, 0.1);
     --chat-messageBorder: 1px solid rgba(230, 230, 230, 0.1);
     --chat-linkColor: #338CFF;
     --chat-messageBorderRadius: 13px;
-    --chat-botMessageBackground: #1f2124;
+    --chat-botMessageBackground: #090a0b;
     --chat-botMessageColor: white;
     --chat-userMessageTextColor: #ffffff;
     --chat-userMessageBackground: var(--blueButtonGradient);
 
     /* CHAT INPUT SETTINGS */
-    --chat-inputBackground: #1f2124;
+    --chat-inputBackground: #090a0b;
     --chat-inputOutline: 2px solid var(--blueAccent2);
-    --chat-inputBorder: 1px solid rgba(75, 70, 116, 0.3);
+    --chat-inputBorder: 2px solid rgba(75, 70, 116, 0.3);
     --chat-inputBorderRadius: 17px;
     --chat-inputSendButtonBackground: var(--chat-primary);
     --chat-inputSendButtonDisabledBackground: rgb(197, 197, 197);
@@ -136,9 +136,9 @@
     width: calc(100vw - 30px);
     max-height: var(--chat-desktop-height);
     height: calc(100dvh - 110px);
-    background: var(--chat-headerGradient);
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
+    background: transparent;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
     box-shadow: 0px 10px 45px rgba(26, 27, 49, 0.225);
     border-radius: var(--chat-borderRadius);
     outline: var(--chat-border);
@@ -174,13 +174,14 @@
 /* CHAT HEADER */
 
 .optiflowz-chat-header{
-    width: 100%;
-    background: transparent;
-    border-bottom: var(--chat-headerBottomBorder);
+    width: calc(100% - 10px);
+    background: var(--chat-headerGradient);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 17px;
+    border-radius: 20px;
+    margin-top: 5px;
     z-index: 3;
 }
 
@@ -324,10 +325,9 @@
 .optiflowz-chat-body{
     scroll-behavior: smooth;
     position: relative;
-    background: var(--chat-chatBackground);
+    background: transparent;
     border-radius: var(--chat-bodyBorderRadius);
     border-right: 2px solid transparent;
-    border-top: var(--chat-inputBorder);
     flex-grow: 1;
     width: 100%;
     overflow-y: scroll;
@@ -570,12 +570,12 @@
     padding-bottom: 2px;
     background: var(--chat-botMessageBackground);
     border: var(--chat-inputBorder);
+    color: #FFF;
     transition: all .15s ease-in-out;
     cursor: pointer;
 }
 .optiflowz-rating-content .optiflowz-rating-actions button:nth-child(2){
     background: var(--chat-primary);
-    color: #FFF;
 }
 .optiflowz-rating-content .optiflowz-rating-actions button:hover{
     filter: brightness(0.9);
@@ -587,6 +587,7 @@
     height: 30px;
     padding-inline: 0px;
     padding-bottom: 2px;
+    color: white !important;
     background: var(--chat-botMessageBackground);
     border: var(--chat-inputBorder);
     transition: all .15s ease-in-out;
@@ -600,6 +601,7 @@
 .optiflowz-rating-content .optiflowz-rating-buttons button.selected{
     border-radius: 7px;
     font-weight: 700;
+    color: black !important;
     transform: scale(1.1) rotate(5deg);
 }
 
@@ -686,7 +688,6 @@
 
 .optiflowz-chat-input{
     position: relative;
-    background: var(--chat-chatBackground);
     min-height: 65px;
     width: 100%;
     padding: 10px;
