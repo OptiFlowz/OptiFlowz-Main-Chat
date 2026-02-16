@@ -136,7 +136,7 @@
     width: calc(100vw - 30px);
     max-height: var(--chat-desktop-height);
     height: calc(100dvh - 110px);
-    background: transparent;
+    background: #ffffff0d;
     -webkit-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
     box-shadow: 0px 10px 45px rgba(26, 27, 49, 0.225);
@@ -175,6 +175,7 @@
 
 .optiflowz-chat-header{
     width: calc(100% - 10px);
+    outline: var(--chat-messageBorder);
     background: var(--chat-headerGradient);
     display: flex;
     align-items: center;
@@ -452,14 +453,14 @@
     flex-shrink: 0;
     width: 7px !important;
     height: 7px !important;
-    background: #3c3e4e !important;
+    background: white !important;
     border-radius: 50% !important;
     animation: dotBounce 1s infinite;
 }
 
 .optiflowz-typing-indicator div p{
-    opacity: 0.7 !important;
-    color: #3c3e4e !important;
+    opacity: 1 !important;
+    color: white !important;
     font-weight: 500;
     margin-left: 10px !important;
     pointer-events: none !important;
