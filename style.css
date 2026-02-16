@@ -6,8 +6,8 @@
     --chat-desktop-height: 550px;
     --chat-primary: #338CFF;
     --chat-secondary: #185fbd;
-    --chat-borderRadius: 15px;
-    --chat-border: 1px solid rgba(230, 230, 230, 0.5);
+    --chat-borderRadius: 25px;
+    --chat-border: 1px solid rgba(230, 230, 230, 0.3);
 
     --blueAccent1: #003e8e;
     --blueAccent2: #338cff;
@@ -19,7 +19,7 @@
     --chatMainGradient: var(--blueButtonGradient);
 
     /* CHAT HEADER SETTINGS */
-    --chat-headerGradient: linear-gradient(-90deg, #3c3e4e, #131417);
+    --chat-headerGradient: #ffffff0d;
     --chat-headerTextColor: #FFFFFF;
     --chat-headerBottomBorder: none;
     --chat-headerButtonBackground: #FFFFFF;
@@ -27,26 +27,26 @@
 
     /* CHAT BODY SETTINGS */
     --chat-bodyBorderRadius: 24px 24px 0px 0px;
-    --chat-chatBackground: rgb(241, 242, 245);
+    --chat-chatBackground: #090a0b;
     --chat-messageFontSize: 1.1rem;
-    --chat-messageLineHeight: 1.4rem;
+    --chat-messageLineHeight: 1.32;
     --chat-messageBoxShadow: 0px 0px 20px rgba(26, 27, 49, 0.1);
-    --chat-messageBorder: 0px solid rgba(75, 70, 116, 0.3);
+    --chat-messageBorder: 1px solid rgba(230, 230, 230, 0.1);
     --chat-linkColor: #338CFF;
-    --chat-messageBorderRadius: 18px;
-    --chat-botMessageBackground: #ffffff;
-    --chat-botMessageColor: #131417;
+    --chat-messageBorderRadius: 13px;
+    --chat-botMessageBackground: #1f2124;
+    --chat-botMessageColor: white;
     --chat-userMessageTextColor: #ffffff;
-    --chat-userMessageBackground: #3c3f4e;
+    --chat-userMessageBackground: var(--blueButtonGradient);
 
     /* CHAT INPUT SETTINGS */
-    --chat-inputBackground: #FFFFFF;
-    --chat-inputOutline: 1px solid #131417;
+    --chat-inputBackground: #1f2124;
+    --chat-inputOutline: 2px solid var(--blueAccent2);
     --chat-inputBorder: 1px solid rgba(75, 70, 116, 0.3);
-    --chat-inputBorderRadius: 10px;
+    --chat-inputBorderRadius: 17px;
     --chat-inputSendButtonBackground: var(--chat-primary);
     --chat-inputSendButtonDisabledBackground: rgb(197, 197, 197);
-    --chat-inputSendButtonBorderRadius: 7px;
+    --chat-inputSendButtonBorderRadius: 10px;
     --chat-inputSendButtonSVGFill: #FFFFFF;
     --chat-inputTextAreaPlaceholderColor: rgba(111, 122, 146, 0.7);
 }
@@ -91,6 +91,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    will-change: transform;
     transition: all .2s ease-out;
 }
 
@@ -136,6 +137,8 @@
     max-height: var(--chat-desktop-height);
     height: calc(100dvh - 110px);
     background: var(--chat-headerGradient);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
     box-shadow: 0px 10px 45px rgba(26, 27, 49, 0.225);
     border-radius: var(--chat-borderRadius);
     outline: var(--chat-border);
@@ -148,6 +151,7 @@
     transition: opacity .1s ease-in-out, transform .15s ease-in-out;
     transform: scale(0);
     opacity: 0;
+    will-change: transform;
     pointer-events: none;
 }
 @media screen and (max-width: 480px) {
@@ -176,7 +180,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 17px;
     z-index: 3;
 }
 
@@ -188,8 +192,8 @@
 }
 
 .optiflowz-chat-header div img{
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background-color: white;
     border: 1px solid rgba(75, 70, 116, 0.3);
@@ -205,10 +209,10 @@
 .optiflowz-chat-header div button, .optiflowz-chat-header div a{
     position: relative;
     background: var(--chat-headerButtonBackground);
-    border-radius: 7px;
+    border-radius: 999px;
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -219,23 +223,23 @@
     content: "New conversation";
     opacity: 0;
     position: absolute;
-    top: 34px;
+    top: 37px;
     right: 0;
     width:max-content;
     padding: 5px;
     padding-inline: 10px;
-    border-radius: 7px;
+    border-radius: 999px;
     color: black;
     font-size: 0.8rem;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.582);
     background: var(--chat-headerButtonBackground);
+    will-change: top;
     pointer-events: none;
     transition: all .2s ease-in-out .05s;
 }
 .optiflowz-chat-header div button:hover::after, .optiflowz-chat-header div a:hover::after{
-    filter: none;
     opacity: 1;
-    top: 37px;
+    top: 40px;
 }
 
 .optiflowz-chat-header div button:nth-child(2)::after{
@@ -245,7 +249,7 @@
     content: "Privacy Policy";
 }
 .optiflowz-chat-header div button:hover, .optiflowz-chat-header div a:hover{
-    filter: brightness(0.8);
+    background-color: rgb(223, 223, 223);
 }
 
 .optiflowz-chat-header div button svg, .optiflowz-chat-header div a svg{
@@ -323,6 +327,7 @@
     background: var(--chat-chatBackground);
     border-radius: var(--chat-bodyBorderRadius);
     border-right: 2px solid transparent;
+    border-top: var(--chat-inputBorder);
     flex-grow: 1;
     width: 100%;
     overflow-y: scroll;
@@ -369,7 +374,7 @@
     padding: 20px;
     padding-block: 15px;
     border-radius: var(--chat-messageBorderRadius);
-    border: var(--chat-messageBorder);
+    outline: var(--chat-messageBorder);
     margin: 0px;
     word-break: break-word;
     -ms-word-break: break-word;
@@ -381,9 +386,8 @@
     gap: 7px;
 }
 .optiflowz-chat-messages .questions div{
-    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    background: var(--chat-headerGradient);
+    background: var(--blueButtonGradient);
     color: var(--chat-userMessageTextColor);
     width: 100%;
     max-width: 100%;
@@ -712,6 +716,7 @@
     height: 45px;
     flex-grow: 1;
     background-color: transparent;
+    color: white;
     border: none;
     resize: none;
     font-size: 1.1rem;
@@ -742,7 +747,7 @@
 
 .optiflowz-chat-input div button{
     filter: grayscale(1);
-    background: var(--chat-inputSendButtonDisabledBackground);
+    background: var(--blueButtonGradient);
     border: none;
     border-radius: var(--chat-inputSendButtonBorderRadius);
     margin: 7px;
@@ -755,7 +760,6 @@
 }
 
 .optiflowz-chat-input div button.clickable{
-    background: var(--chat-inputSendButtonBackground);
     pointer-events: all;
     cursor: pointer;
     filter: grayscale(0);
